@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ro'yxatdan o'tish</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: url('bio2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .form-box img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .success {
+      color: green;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <img src="ram.jpg" alt="Logo">
+  <h2>Ro'yxatdan o'tish</h2>
+  <form id="regForm">
+    <input type="text" name="entry.187715501" placeholder="Ismingiz" required />
+    <input type="text" name="entry.1670462802" placeholder="Familyangiz" required />
+    <input type="tel" name="entry.938786754" placeholder="Telefon raqam (+998...)" required />
+    <button type="submit">Yuborish</button>
+    <div id="status" class="success"></div>
+  </form>
+</div>
+
+<script>
+  document.getElementById('regForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLSfZqTeuEf318WsFTiu9bdZr9wcD4kY3rj7UPsb8qzPOBSOBFA/formResponse', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: data
+    }).then(() => {
+      form.reset();
+      document.getElementById('status').innerText = "✅ Ma'lumot yuborildi!";
+    }).catch(() => {
+      document.getElementById('status').innerText = "❌ Xatolik yuz berdi!";
+    });
+  });
+</script>
+
+</body>
+</html>
